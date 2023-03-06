@@ -55,7 +55,7 @@ app.get("/:id", (req:any ,res:any)=>{ //   WORKING
 // })
 
 //adding new employee
-app.post("/addemp", (req: any, res: any) => {
+app.post("/addemp", (req: any, res: any) => {  //WORKING
   let eid: number = req.body.eid;
   let ename: string = req.body.ename;
   let fname: string = req.body.fname;
@@ -81,7 +81,6 @@ app.post("/addemp", (req: any, res: any) => {
     (error: any, result: any) => {
       if (error && error.code === "23505") {
         console.log(error.message);
-        // throw Error(error.message);
       } 
     // if(error){
     //     // throw Error(`user with id ${eid} is already present`);
@@ -157,7 +156,7 @@ app.put("/emp/id/:id", (req: any, res: any) => {
 //     }
 //   );
 
-app.delete("/delete/:id", (req:any,res:any)=>{
+app.delete("/delete/:id", (req:any,res:any)=>{ //WORKING
     let eid = req.query.eid;
     database1.query(`DELETE FROM emp WHERE empid = ${eid}`,(err:any , result:any)=>{
         // let data = req.body;

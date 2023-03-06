@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "pg": "^8.9.0",
+    "typescript": "^4.9.5"
+  },
+  "name": "practiceexpress",
+  "version": "1.0.0",
+  "main": "serverCalci.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^18.14.6"
+  }
+}

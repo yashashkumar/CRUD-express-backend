@@ -2,25 +2,25 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
-let database1 = require("./connection");
+let database1 = require("./newConnection");
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
-app.get("/", (req: any, res: any) => {
+app.get("/", (req: any, res: any) => {  //WORKING
   // res.send("yey your server setup is successful")
   // res.sendFile( __dirname+"/index.html")
-  res.send("Hello World!");
+  res.send("Hello World!")
 });
 
-// let getAllData = "SELECT * FROM emp"; //query to get all users
-app.get("/getemp", (req: any, res: any) => { //WORKING
-    database1.query(`SELECT * FROM emp`, (err: any, result: any) => {
+//GET ALL RECORDS - WORKING PROPERLY
+app.get("/get", (req: any, res: any) => { //WORKING
+    database1.query(`SELECT * FROM datasets`, (err: any, result: any) => {
       if(err){
           console.log(err.message);
       }
       else{
-          res.send(result);
+          res.send(result.rows);
         // let data = req.body;
         // res.send('Data Received: ' + JSON.stringify(data));
       }
@@ -29,10 +29,10 @@ app.get("/getemp", (req: any, res: any) => { //WORKING
   });
 
 
-//GET RECORD BY ID
-app.get("/:id", (req:any ,res:any)=>{ //   WORKING
-    let eid = req.query.eid;
-    database1.query(`SELECT * FROM emp WHERE empid= ${eid}`,(err:any , result:any)=>{
+//GET RECORD BY ID - WORKING PROPERLY
+app.get("/get/:id", (req:any ,res:any)=>{ 
+    let id:string = req.query.id;
+    database1.query(`SELECT * FROM datasets WHERE id= '${id}'`,(err:any , result:any)=>{
         if(err){
             console.log(err);
         }
@@ -43,9 +43,6 @@ app.get("/:id", (req:any ,res:any)=>{ //   WORKING
     })
     database1.end;
 })
-
-
-
 //hardcoding new employee
 // database1.query(`INSERT INTO emp VALUES(2,'hello','{"fname":"hello","lname":"world"}',123456789,'banglore','2023-03-06 10:38:20.768541','null')` ,(error:any ,result:any)=>{
 //     console.log(result);
@@ -54,38 +51,41 @@ app.get("/:id", (req:any ,res:any)=>{ //   WORKING
 //     database1.end;
 // })
 
-//adding new employee
-app.post("/addemp", (req: any, res: any) => {  //WORKING
-  let eid: number = req.body.eid;
-  let ename: string = req.body.ename;
+//ADDING NEW RECORD-WORKING PROPERLY
+app.post("/datasets/create", (req: any, res: any) => {  
+  let id: string = req.body.id;
   let fname: string = req.body.fname;
   let lname: string = req.body.lname;
-  let subname: any = {
+  let dataschema: any = {
     fname: `${fname}`,
     lname: `${lname}`,
   };
-  let phno: number = req.body.phno;
-  let location: string = req.body.location;
+  let method:string = req.body.method;
+  let routerconfig:any = {
+      method : `${method}`
+  }
+  let status:string = req.body.status; 
+  let createdBy: string = req.body.createdBy;
+  let updatedBy:string = req.body.updatedBy
 
   // to generate date
   const today = new Date();
 //   console.log(today.toLocaleDateString()); // 3/28/2022 (depending on locale)
-  let createdDate: any = today.toLocaleDateString();
+  let createdDate: any = today.toLocaleString();
+  let updatedDate: any = today.toLocaleString();
 
   //parsing the json values to string
-  let subnameJson = JSON.stringify(subname);
+  let dataSchema = JSON.stringify(dataschema);
+  let routerConfig = JSON.stringify(routerconfig);
 
   //INSERTING EMP DETAILS
   database1.query(
-    `INSERT INTO emp VALUES(${eid},'${ename}','${subnameJson}',${phno},'${location}','${createdDate}')`,
+    `INSERT INTO datasets VALUES('${id}','${dataSchema}','${routerConfig}','${status}','${createdBy}','${updatedBy}','${createdDate}','${updatedDate}')`,
     (error: any, result: any) => {
+      //PRIMARY KEY VALIDATION
       if (error && error.code === "23505") {
         console.log(error.message);
       } 
-    // if(error){
-    //     // throw Error(`user with id ${eid} is already present`);
-    //     console.log(error);
-    // }
     else {
         // let data = req.body;
         // res.send('Data Received: ' + JSON.stringify(data));
@@ -96,34 +96,38 @@ app.post("/addemp", (req: any, res: any) => {  //WORKING
   database1.end;
 });
 
-//UPDATING USER
-app.put("/emp/id/:id", (req: any, res: any) => {
-  let eid = req.query.eid;
-  console.log(eid);
-  let ename = req.body.ename;
+//UPDATING USER - WORKING PROPERLY
+app.put("/datasets/id/:id", (req: any, res: any) => {
+  let id = req.query.id;
+  console.log(id);
   let fname = req.body.fname;
   let lname = req.body.lname;
-  let subname: any = {
+  let dataschema: any = {
     fname: `${fname}`,
     lname: `${lname}`,
   };
+  let method:string = req.body.method;
+  let routerconfig = {
+    method : `${method}`
+  }
   //parsing the json values to string
-  let subnameJson = JSON.stringify(subname);
+  let dataSchema = JSON.stringify(dataschema);
+  let routerConfig = JSON.stringify(routerconfig);
 
-  let phno = req.body.phno;
-  let location = req.body.location;
+  let status = req.body.status;
+  let updatedBy = req.body.updatedBy;
 
   const today = new Date();
 //   console.log(today.toLocaleDateString());
   let updatedDate: any = today.toLocaleString();
 
   database1.query(
-    `UPDATE emp 
-     SET ename = '${ename}' ,subname = '${subnameJson}',phno = ${phno} ,location = '${location}',updated_date = '${updatedDate}' 
-     WHERE empid = ${eid}`,
+    `UPDATE datasets 
+     SET data_schema = '${dataSchema}' ,router_config = '${routerConfig}',status = '${status}' ,updated_by = '${updatedBy}',updated_date = '${updatedDate}' 
+     WHERE id = '${id}'`,
     (err: any, result: any) => {
       if (err) {
-        console.log(err);
+        console.log(err.message);
       } else {
         res.send(result);
       }
@@ -131,7 +135,6 @@ app.put("/emp/id/:id", (req: any, res: any) => {
   );
   database1.end;
 });
-
 // HARDCODING
 // database1.query(
 //     `UPDATE emp
@@ -143,8 +146,6 @@ app.put("/emp/id/:id", (req: any, res: any) => {
 //       }
 //     }
 //   );
-
-
 //DELETING USER BY ID
 // database1.query(
 //     `DELETE FROM emp
@@ -156,13 +157,14 @@ app.put("/emp/id/:id", (req: any, res: any) => {
 //     }
 //   );
 
-app.delete("/delete/:id", (req:any,res:any)=>{ //WORKING
-    let eid = req.query.eid;
-    database1.query(`DELETE FROM emp WHERE empid = ${eid}`,(err:any , result:any)=>{
+//DELETING RECORD BY ID
+app.delete("/datasets/delete/:id", (req:any,res:any)=>{ //WORKING
+    let id:string = req.query.id;
+    database1.query(`DELETE FROM datasets WHERE id = '${id}'`,(err:any , result:any)=>{
         // let data = req.body;
         // let resObj = JSON.stringify(data);
         if(res.json(null)){
-            console.log(`data with id ${eid} not present`);
+            console.log(`data with id '${id}' not present`);
         }
         else{
             let data = req.body;

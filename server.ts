@@ -78,22 +78,32 @@ app.post("/datasets/create", (req: any, res: any) => {
   let dataSchema = JSON.stringify(dataschema);
   let routerConfig = JSON.stringify(routerconfig);
 
-  //INSERTING EMP DETAILS
-  database1.query(
-    `INSERT INTO datasets VALUES('${id}','${dataSchema}','${routerConfig}','${status}','${createdBy}','${updatedBy}','${createdDate}','${updatedDate}')`,
-    (error: any, result: any) => {
-      //PRIMARY KEY VALIDATION
-      if (error && error.code === "23505") {
-        console.log(error.message);
-      } 
-    else {
-        // let data = req.body;
-        // res.send('Data Received: ' + JSON.stringify(data));
-        res.send(result);
-      }
+  database1.query(`SELECT * FROM datasets WHERE id = '${id}'`,(err :any,result:any)=>{
+    console.log(result);
+    if(result.rowCount === 0){
+      database1.query(
+        `INSERT INTO datasets VALUES('${id}','${dataSchema}','${routerConfig}','${status}','${createdBy}','${updatedBy}','${createdDate}','${updatedDate}')`,
+        (error: any, result: any) => {
+          //PRIMARY KEY VALIDATION
+          if (error) {
+            console.log(error.message);
+          } 
+        else {
+            // let data = req.body;
+            // res.send('Data Received: ' + JSON.stringify(data));
+            res.send(result);
+          }
+        }
+      );
+      database1.end;
     }
-  );
-  database1.end;
+    else{
+      console.log(`id '${id}' already present`);
+    }
+  })
+
+  //INSERTING EMP DETAILS
+  
 });
 
 //UPDATING USER - WORKING PROPERLY

@@ -37,34 +37,3 @@ app.listen(port, () => {
 
 database1.connect();
 
-
-//hardcoding new employee
-// database1.query(`INSERT INTO emp VALUES(2,'hello','{"fname":"hello","lname":"world"}',123456789,'banglore','2023-03-06 10:38:20.768541','null')` ,(error:any ,result:any)=>{
-//     console.log(result);
-//     // let data = req.body;
-//     // res.send('Data Received: ' + JSON.stringify(data));
-//     database1.end;
-// })
-
-// HARDCODING
-// database1.query(
-//     `UPDATE emp
-//      SET ename = 'prajwal123' ,phno = 123456789 ,location = 'banglore',updated_date = '06-03-23'
-//      WHERE empid = 3`,
-//     (err: any, result: any) => {
-//       if (err) {
-//         console.log(err);
-//       }
-//     }
-//   );
-//DELETING USER BY ID
-// database1.query(
-//     `DELETE FROM emp
-//      WHERE empid = 3`,
-//     (err: any, result: any) => {
-//       if (err) {
-//         console.log(err);
-//       }
-//     }
-//   );
-

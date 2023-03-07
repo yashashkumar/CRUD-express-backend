@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 2000;
 
 import home from "./helper/home";
 import getAllRecords from "./helper/getAllRecords";
@@ -14,6 +14,7 @@ let database1 = require("./helper/newConnection");
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
+//HOME ROUTE
 app.get("/", home);
 
 //GET ALL RECORDS - WORKING PROPERLY

@@ -1,7 +1,7 @@
 let database1 = require("./newConnection");
 
 let updateRecord =(req: any, res: any) => {
-    let id = req.query.id;
+    let id:string = req.query.id;
     console.log(id);
     let dataschema:object = req.body.dataschema;
     let routerconfig:object = req.body.routerconfig;
@@ -16,6 +16,16 @@ let updateRecord =(req: any, res: any) => {
   //   console.log(today.toLocaleDateString());
     let updatedDate: any = today.toLocaleString();
   
+    let updatedMessage = {
+      status : "updated",
+      message : `id with '${id}' updated successfully`
+    }
+
+    let unsuccessfulUpdate = {
+      status : "update unsuccessful",
+      message : `data with specified id '${id}' is not present`
+    }
+
     database1.query(
       `UPDATE datasets 
        SET data_schema = '${dataSchema}' ,router_config = '${routerConfig}',status = '${status}' ,updated_by = '${updatedBy}',updated_date = '${updatedDate}' 
@@ -23,8 +33,12 @@ let updateRecord =(req: any, res: any) => {
       (err: any, result: any) => {
         if (err) {
           console.log(err.message);
-        } else {
-          res.send(req.body);
+        } 
+        else if(result.rowCount != 0){
+          res.send(updatedMessage);
+        }
+        else{
+          res.send(unsuccessfulUpdate)
         }
       }
     );

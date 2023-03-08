@@ -14,6 +14,8 @@ let database1 = require("./helper/newConnection");
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
+const {addDataValidation} = require("./validation/data.validation")
+
 //HOME ROUTE
 app.get("/", home);
 
@@ -24,10 +26,10 @@ app.get("/get", getAllRecords);
 app.get("/get/id/:id", getRecordById)
 
 //ADDING NEW RECORD-WORKING PROPERLY
-app.post("/datasets/create", addRecord);
+app.post("/datasets/create",addDataValidation, addRecord );
 
 //UPDATING USER - WORKING PROPERLY
-app.put("/datasets/id/:id", updateRecord);
+app.put("/datasets/id/:id",addDataValidation, updateRecord);
 
 //DELETING RECORD BY ID
 app.delete("/datasets/delete/:id", deleteById)

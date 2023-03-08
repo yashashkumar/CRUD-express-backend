@@ -1,7 +1,12 @@
 let database1 = require("./newConnection");
 
-let addRecord = (req: any, res: any) => {
-  let id: string = req.body.id;
+let addRecord = (req:any , res:any) => {
+  let data = req.body;
+  // // let newdata = [...data]
+  // console.log(data);
+
+  let id:string = req.body.id;
+  // let id1:string =100;
   let dataschema: object = req.body.dataschema;
   let routerconfig: object = req.body.routerconfig;
   // console.log(routerconfig);
@@ -17,6 +22,7 @@ let addRecord = (req: any, res: any) => {
 
   //parsing the json values to string
   let dataSchema = JSON.stringify(dataschema);
+  // console.log(dataSchema);
   let routerConfig = JSON.stringify(routerconfig);
   // console.log(routerConfig);
 
@@ -43,6 +49,7 @@ let addRecord = (req: any, res: any) => {
           (error: any, result: any) => {
             if (error) {
               console.log(error);
+              error.routine === 'json_ereport_error' ? res.send(invalidIp) : res.send(result);
             } else {
               // let data = req.body;
               // res.send('Data Received: ' + JSON.stringify(data));

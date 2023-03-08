@@ -30,7 +30,7 @@ app.post("/datasets/create", addRecord);
 app.put("/datasets/id/:id", updateRecord);
 
 //DELETING RECORD BY ID
-app.delete("/datasets/delete/id/:id", deleteById)
+app.delete("/datasets/delete/:id", deleteById)
 
 app.listen(port, () => {
   console.log(`server running in port ${port}`);

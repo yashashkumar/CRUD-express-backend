@@ -4,14 +4,13 @@ let updateRecord =(req: any, res: any) => {
     let id = req.query.id;
     console.log(id);
     let dataschema:object = req.body.dataschema;
-    let method:string = req.body.method;
     let routerconfig:object = req.body.routerconfig;
     //parsing the json values to string
     let dataSchema = JSON.stringify(dataschema);
     let routerConfig = JSON.stringify(routerconfig);
   
-    let status = req.body.status;
-    let updatedBy = req.body.updatedBy;
+    let status:string = req.body.status;
+    let updatedBy:string = req.body.updatedBy;
   
     const today = new Date();
   //   console.log(today.toLocaleDateString());

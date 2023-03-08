@@ -3,16 +3,9 @@ let database1 = require("./newConnection");
 let updateRecord =(req: any, res: any) => {
     let id = req.query.id;
     console.log(id);
-    let fname = req.body.fname;
-    let lname = req.body.lname;
-    let dataschema: any = {
-      fname: `${fname}`,
-      lname: `${lname}`,
-    };
+    let dataschema:object = req.body.dataschema;
     let method:string = req.body.method;
-    let routerconfig = {
-      method : `${method}`
-    }
+    let routerconfig:object = req.body.routerconfig;
     //parsing the json values to string
     let dataSchema = JSON.stringify(dataschema);
     let routerConfig = JSON.stringify(routerconfig);
@@ -32,7 +25,7 @@ let updateRecord =(req: any, res: any) => {
         if (err) {
           console.log(err.message);
         } else {
-          res.send(result);
+          res.send(req.body);
         }
       }
     );

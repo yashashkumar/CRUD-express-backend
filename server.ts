@@ -21,7 +21,7 @@ app.get("/", home);
 app.get("/get", getAllRecords);
 
 //GET RECORD BY ID - WORKING PROPERLY
-app.get("/get/:id", getRecordById)
+app.get("/get/id/:id", getRecordById)
 
 //ADDING NEW RECORD-WORKING PROPERLY
 app.post("/datasets/create", addRecord);
@@ -30,7 +30,7 @@ app.post("/datasets/create", addRecord);
 app.put("/datasets/id/:id", updateRecord);
 
 //DELETING RECORD BY ID
-app.delete("/datasets/delete/:id", deleteById)
+app.delete("/datasets/delete/id/:id", deleteById)
 
 app.listen(port, () => {
   console.log(`server running in port ${port}`);

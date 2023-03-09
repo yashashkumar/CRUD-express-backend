@@ -4,7 +4,7 @@ module.exports = {
     addDataValidation : (req:any ,res:any,next:any)=>{
         let validation = postData.validate(req.body);
         if(validation.error){
-            res.json({
+            res.status(400).json({
                 error : "unable to post data",
                 message : validation.error.details[0].message
             })

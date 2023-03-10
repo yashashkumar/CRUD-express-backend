@@ -8,14 +8,14 @@ const datasetsDB = new Client({
   database: "dataset",
 });
 
-try {
-  datasetsDB.connect();
-  console.log("connected");
-} 
-catch (err) {
-  throw err;
-}
-
+datasetsDB.connect((err : any , res:any)=>{
+  if(err){
+    throw err.message;
+  }
+  else{
+    console.log("connected");
+  }
+});
 module.exports = datasetsDB;
 
 //changing password now to check

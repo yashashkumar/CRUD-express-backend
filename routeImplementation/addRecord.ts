@@ -1,4 +1,5 @@
-let database1 = require("./newConnection");
+// let database1 = require("./newConnection");
+import datasetsDB from "./newConnection";
 
 import { getRecordByIdQuery } from "../queries/query";
 import { insertQuery } from "../queries/query";
@@ -30,21 +31,21 @@ let addRecord = (req: any, res: any) => {
   };
 
   //PRIMARY KEY VALIDATION
-  database1.query(getRecordByIdQuery + `'${id}'`, (err: any, result: any) => {
+  datasetsDB.query(getRecordByIdQuery + `'${id}'`, (err: any, result: any) => {
     // console.log(result);
     if (result.rowCount === 0) {
-      database1.query(
+      datasetsDB.query(
         insertQuery +
           `('${id}','${dataSchema}','${routerConfig}','${status}','${createdBy}','${updatedBy}','${createdDate}','${updatedDate}')`,
         (error: any, result: any) => {
-          error ? error : res.send(result);
+          error ? console.log(error) : res.send(result);
         }
       );
     } else {
       res.status(400).send(errObj);
     }
   });
-  database1.end;
+  datasetsDB.end;
 };
 
 export default addRecord;

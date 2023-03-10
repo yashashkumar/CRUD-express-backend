@@ -1,4 +1,5 @@
-let database1 = require("./newConnection");
+// let database1 = require("./newConnection");
+import datasetsDB from "./newConnection";
 
 let updateRecord = (req: any, res: any) => {
   let id: string = req.query.id;
@@ -25,19 +26,19 @@ let updateRecord = (req: any, res: any) => {
     message: `data with specified id '${id}' is not present`,
   };
 
-  database1.query(
+  datasetsDB.query(
     `UPDATE datasets 
        SET data_schema = '${dataSchema}' ,router_config = '${routerConfig}',status = '${status}' ,updated_by = '${updatedBy}',updated_date = '${updatedDate}' 
        WHERE id = '${id}'`,
     (err: any, result: any) => {
       err
-        ? err
+        ? console.log(err)
         : result.rowCount != 0
         ? res.send(updatedMessage)
         : res.status(400).send(unsuccessfulUpdate);
     }
   );
-  database1.end;
+  datasetsDB.end;
 };
 
 export default updateRecord;

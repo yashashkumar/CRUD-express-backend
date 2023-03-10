@@ -1,4 +1,5 @@
-let database1 = require("./newConnection");
+// let database1 = require("./newConnection");
+import datasetsDB from "./newConnection";
 import { getRecordByIdQuery } from "../queries/query";
 
 let getRecordById = (req: any, res: any) => {
@@ -10,7 +11,7 @@ let getRecordById = (req: any, res: any) => {
     result: `the record with the id '${id}' is not present`,
   };
 
-  database1.query(getRecordByIdQuery + `'${id}'`, (err: any, result: any) => {
+  datasetsDB.query(getRecordByIdQuery + `'${id}'`, (err: any, result: any) => {
     if (err) {
       console.log(err);
     } else if (result.rowCount != 0) {
@@ -23,7 +24,7 @@ let getRecordById = (req: any, res: any) => {
       res.status(400).send(resultMessage);
     }
   });
-  database1.end;
+  datasetsDB.end;
 };
 
 export default getRecordById;

@@ -1,4 +1,5 @@
-let database1 = require("./newConnection");
+// let database1 = require("./newConnection");
+import datasetsDB from "./newConnection";
 import { deleteQuery } from "../queries/query";
 
 //WORKING
@@ -15,14 +16,14 @@ let deleteById = (req: any, res: any) => {
     message: `the record with the id '${id}' is not present`,
     // record: result.rows
   };
-  database1.query(deleteQuery + `'${id}'`, (err: any, result: any) => {
+  datasetsDB.query(deleteQuery + `'${id}'`, (err: any, result: any) => {
     err
-      ? err
+      ? console.log(err)
       : result.rowCount === 0
       ? res.status(400).send(deleteResObj)
       : res.send(deleteMessage);
   });
-  database1.end;
+  datasetsDB.end;
 };
 
 export default deleteById;

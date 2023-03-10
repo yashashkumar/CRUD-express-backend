@@ -16,6 +16,7 @@ datasetsDB.connect((err : any , res:any)=>{
     console.log("connected");
   }
 });
-module.exports = datasetsDB;
+// module.exports = datasetsDB;
+export default datasetsDB;
 
 //changing password now to check

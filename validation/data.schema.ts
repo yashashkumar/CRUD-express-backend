@@ -1,4 +1,5 @@
-import joi from "joi";
+// import joi from "joi";
+let joi = require("joi")
 
 const data = {
     postData : joi.object({
@@ -11,4 +12,5 @@ const data = {
     })
 }
 
-module.exports = data;
+// module.exports = data;
+export default data;

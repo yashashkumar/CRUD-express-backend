@@ -1,4 +1,5 @@
-import express from "express";
+// import express from "express";
+let express = require("express")
 const app = express();
 const port = 2000;
 
@@ -12,7 +13,9 @@ import deleteById from "./routeImplementation/deleteRecordById";
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
-const { addDataValidation } = require("./validation/data.validation");
+// const { addDataValidation } = require("./validation/data.validation");
+// let addDataValidation = require("./validation/data.validation");
+import addDataValidation from "./validation/data.validation";
 
 //HOME ROUTE
 app.get("/", home);
@@ -24,10 +27,10 @@ app.get("/get", getAllRecords);
 app.get("/get/id/:id", getRecordById);
 
 //ADDING NEW RECORD - WORKING PROPERLY
-app.post("/datasets/create", addDataValidation, addRecord);
+app.post("/datasets/create",addDataValidation, addRecord);
 
 //UPDATING USER - WORKING PROPERLY
-app.put("/datasets/id/:id", addDataValidation, updateRecord);
+app.put("/datasets/id/:id",addDataValidation, updateRecord);
 
 //DELETING RECORD BY ID - WORKING PROPERLY
 app.delete("/datasets/delete/:id", deleteById);

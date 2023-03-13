@@ -1,8 +1,9 @@
-const {postData} = require("./data.schema");
+// const {postData} = require("./data.schema");
+import data from "./data.schema";
 
-module.exports = {
-    addDataValidation : (req:any ,res:any,next:any)=>{
-        let validation = postData.validate(req.body);
+
+    const addDataValidation = (req:any ,res:any,next:any)=>{
+        let validation = data.postData.validate(req.body);
         if(validation.error){
             res.status(400).json({
                 error : "unable to post data",
@@ -13,4 +14,5 @@ module.exports = {
             next();
         }
     }
-}
+
+    export default addDataValidation;

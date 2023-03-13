@@ -15,8 +15,9 @@ let addRecord = (req: any, res: any) => {
   // to generate date
   const today = new Date();
   // console.log(today.toLocaleDateString()); // 3/28/2022 (depending on locale)
-  let createdDate: any = today.toLocaleString();
-  let updatedDate: any = today.toLocaleString();
+  let createdDate: any = today.toLocaleString('en-GB', { timeZone: 'UTC' });
+  // console.log(createdDate);
+  let updatedDate: any = today.toLocaleString('en-GB', { timeZone: 'UTC' });
 
   //parsing the json values to string
   let dataSchema = JSON.stringify(dataschema);

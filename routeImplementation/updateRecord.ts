@@ -1,5 +1,6 @@
 // let database1 = require("./newConnection");
 import datasetsDB from "./newConnection";
+import dbErr from "./dbErrHelperObj";
 
 let updateRecord = (req: any, res: any) => {
   let id: string = req.query.id;
@@ -32,7 +33,7 @@ let updateRecord = (req: any, res: any) => {
        WHERE id = '${id}'`,
     (err: any, result: any) => {
       err
-        ? console.log(err)
+        ? res.status(500).send(dbErr)
         : result.rowCount != 0
         ? res.send(updatedMessage)
         : res.status(400).send(unsuccessfulUpdate);

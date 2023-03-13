@@ -2,6 +2,8 @@
 import datasetsDB from "./newConnection";
 import { deleteQuery } from "../queries/query";
 
+import dbErr from "./dbErrHelperObj";
+
 //WORKING
 let deleteById = (req: any, res: any) => {
   let id: string = req.query.id;
@@ -18,7 +20,7 @@ let deleteById = (req: any, res: any) => {
   };
   datasetsDB.query(deleteQuery + `'${id}'`, (err: any, result: any) => {
     err
-      ? console.log(err)
+      ? res.status(500).send(dbErr)
       : result.rowCount === 0
       ? res.status(400).send(deleteResObj)
       : res.send(deleteMessage);

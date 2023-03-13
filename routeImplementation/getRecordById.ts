@@ -1,6 +1,7 @@
 // let database1 = require("./newConnection");
 import datasetsDB from "./newConnection";
 import { getRecordByIdQuery } from "../queries/query";
+import dbErr from "./dbErrHelperObj";
 
 let getRecordById = (req: any, res: any) => {
   let id: string = req.query.id;
@@ -13,7 +14,7 @@ let getRecordById = (req: any, res: any) => {
 
   datasetsDB.query(getRecordByIdQuery + `'${id}'`, (err: any, result: any) => {
     if (err) {
-      console.log(err);
+      res.status(500).send(dbErr)
     } else if (result.rowCount != 0) {
       let resultObjByID: object = {
         message: `the record associated with the id '${id}' is`,

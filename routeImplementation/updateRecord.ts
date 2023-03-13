@@ -14,7 +14,7 @@ let updateRecord = (req: any, res: any) => {
 
   const today = new Date();
   //console.log(today.toLocaleDateString());
-  let updatedDate: any = today.toLocaleString('en-GB', { timeZone: 'UTC' });
+  let updatedDate: any = today.toLocaleString('en-GB');
 
   let updatedMessage = {
     status: "updated",

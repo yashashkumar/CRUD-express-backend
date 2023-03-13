@@ -15,9 +15,9 @@ let addRecord = (req: any, res: any) => {
   // to generate date
   const today = new Date();
   // console.log(today.toLocaleDateString()); // 3/28/2022 (depending on locale)
-  let createdDate: any = today.toLocaleString('en-GB', { timeZone: 'UTC' });
+  let createdDate: any = today.toLocaleString('en-GB');
   // console.log(createdDate);
-  let updatedDate: any = today.toLocaleString('en-GB', { timeZone: 'UTC' });
+  let updatedDate: any = today.toLocaleString('en-GB');
 
   //parsing the json values to string
   let dataSchema = JSON.stringify(dataschema);
@@ -34,16 +34,21 @@ let addRecord = (req: any, res: any) => {
   //PRIMARY KEY VALIDATION
   datasetsDB.query(getRecordByIdQuery + `'${id}'`, (err: any, result: any) => {
     // console.log(result);
-    if (result.rowCount === 0) {
-      datasetsDB.query(
-        insertQuery +
-          `('${id}','${dataSchema}','${routerConfig}','${status}','${createdBy}','${updatedBy}','${createdDate}','${updatedDate}')`,
-        (error: any, result: any) => {
-          error ? console.log(error) : res.send(result);
-        }
-      );
-    } else {
-      res.status(400).send(errObj);
+    try{
+      if (result.rowCount === 0) {
+        datasetsDB.query(
+          insertQuery +
+            `('${id}','${dataSchema}','${routerConfig}','${status}','${createdBy}','${updatedBy}','${createdDate}','${updatedDate}')`,
+          (error: any, result: any) => {
+            error ? console.log(error) : res.send(result);
+          }
+        );
+      } else {
+        res.status(400).send(errObj);
+      }
+    }
+    catch(err){
+      res.status(500).send(result);
     }
   });
   datasetsDB.end;

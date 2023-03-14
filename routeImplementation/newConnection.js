@@ -4,7 +4,7 @@ var Client = require("pg").Client;
 var datasetsDB = new Client({
     host: "localhost",
     user: "postgres",
-    // port: 5432,
+    port: 5432,
     password: "Yashas@200116",
     database: "dataset"
 });
@@ -19,4 +19,3 @@ datasetsDB.connect(function (err, res) {
 });
 // module.exports = datasetsDB;
 exports["default"] = datasetsDB;
-//changing password now to check

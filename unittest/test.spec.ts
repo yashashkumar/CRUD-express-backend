@@ -23,7 +23,7 @@ describe('get records', () => {
 describe('/POST record', () => {
     it('it should not POST a record', (done) => {
         let record = {
-            "id" : "yash1212",
+            "id" : "db100",
             "dataschema" : {
                 "name" : "himagirish",
                 "lname" : "nd"

@@ -21,7 +21,7 @@ describe('get records', function () {
 describe('/POST record', function () {
     it('it should not POST a record', function (done) {
         var record = {
-            "id": "yash161",
+            "id": "yash161", //if unique accepts
             "dataschema": {
                 "name": "himagirish",
                 "lname": "nd"

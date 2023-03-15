@@ -1,8 +1,8 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 // import joi from "joi";
-var joi = require("joi");
-var data = {
+let joi = require("joi");
+const data = {
     postData: joi.object({
         id: joi.string(),
         dataschema: joi.object(),
@@ -13,4 +13,4 @@ var data = {
     })
 };
 // module.exports = data;
-exports["default"] = data;
+exports.default = data;

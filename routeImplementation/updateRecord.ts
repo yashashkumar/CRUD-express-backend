@@ -1,6 +1,7 @@
 // let database1 = require("./newConnection");
 import datasetsDB from "./newConnection";
 import dbErr from "./dbErrHelperObj";
+import { updatedDate } from "../helper/cddate";
 
 let updateRecord = (req: any, res: any) => {
   let id: string = req.query.id;
@@ -12,10 +13,6 @@ let updateRecord = (req: any, res: any) => {
 
   let status: string = req.body.status;
   let updatedBy: string = req.body.updatedBy;
-
-  const today = new Date();
-  //console.log(today.toLocaleDateString());
-  let updatedDate: any = today.toLocaleString('en-GB');
 
   let updatedMessage = {
     status: "updated",

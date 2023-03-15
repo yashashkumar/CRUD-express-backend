@@ -1,6 +1,6 @@
 // let database1 = require("./newConnection");
 import datasetsDB from "./newConnection";
-import { deleteQuery } from "../queries/query";
+import { deleteQuery } from "../helper/query";
 
 import dbErr from "./dbErrHelperObj";
 

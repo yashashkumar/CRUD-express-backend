@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.updatedDate = exports.createdDate = void 0;
+let today = new Date();
+let createdDate = today.toLocaleString("en-GB");
+exports.createdDate = createdDate;
+let updatedDate = today.toLocaleString("en-GB");
+exports.updatedDate = updatedDate;
+console.log(createdDate);
+console.log(updatedDate);
+// export default ;

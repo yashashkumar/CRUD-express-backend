@@ -1,6 +1,6 @@
 // let database1 = require("./newConnection");
 import datasetsDB from "./newConnection";
-import { getRecordByIdQuery } from "../queries/query";
+import { getRecordByIdQuery } from "../helper/query";
 import dbErr from "./dbErrHelperObj";
 
 let getRecordById = (req: any, res: any) => {

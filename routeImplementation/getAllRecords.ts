@@ -1,6 +1,6 @@
 // let database1 = require("./newConnection");
 import datasetsDB from "./newConnection";
-import { selectAllQuery } from "../queries/query";
+import { selectAllQuery } from "../helper/query";
 
 const getAllRecords = (req: any, res: any) => {
   //WORKING

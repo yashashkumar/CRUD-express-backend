@@ -1,14 +1,14 @@
 "use strict";
-exports.__esModule = true;
-var Client = require("pg").Client;
-var datasetsDB = new Client({
+Object.defineProperty(exports, "__esModule", { value: true });
+const { Client } = require("pg");
+const datasetsDB = new Client({
     host: "localhost",
     user: "postgres",
     port: 5432,
     password: "Yashas@200116",
-    database: "dataset"
+    database: "dataset",
 });
-datasetsDB.connect(function (err, res) {
+datasetsDB.connect((err, res) => {
     if (err) {
         // throw err.message;
         console.log(err);
@@ -18,4 +18,4 @@ datasetsDB.connect(function (err, res) {
     }
 });
 // module.exports = datasetsDB;
-exports["default"] = datasetsDB;
+exports.default = datasetsDB;

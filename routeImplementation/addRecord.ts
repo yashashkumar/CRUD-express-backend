@@ -1,10 +1,12 @@
 // let database1 = require("./newConnection");
 import datasetsDB from "./newConnection";
 
-import { getRecordByIdQuery } from "../queries/query";
-import { insertQuery } from "../queries/query";
+import { getRecordByIdQuery } from "../helper/query";
+import { insertQuery } from "../helper/query";
 
 import dbErr from "./dbErrHelperObj";
+
+import {createdDate,updatedDate} from "../helper/cddate"
 
 let addRecord = (req: any, res: any) => {
   let id: string = req.body.id;
@@ -13,12 +15,6 @@ let addRecord = (req: any, res: any) => {
   let status: string = req.body.status;
   let createdBy: string = req.body.createdBy;
   let updatedBy: string = req.body.updatedBy;
-
-  // to generate date
-  const today = new Date();
-  // console.log(today.toLocaleDateString()); // 3/28/2022 (depending on locale)
-  let createdDate: any = today.toLocaleString("en-GB");
-  let updatedDate: any = today.toLocaleString("en-GB");
 
   //parsing the json values to string
   let dataSchema = JSON.stringify(dataschema);
@@ -38,7 +34,7 @@ let addRecord = (req: any, res: any) => {
         insertQuery +
           `('${id}','${dataSchema}','${routerConfig}','${status}','${createdBy}','${updatedBy}','${createdDate}','${updatedDate}')`,
         (error: any, result: any) => {
-          error ? res.status(500).send(dbErr) : res.send(result);
+          error ? console.log(error) : res.send(result);
         }
       );
     } else {

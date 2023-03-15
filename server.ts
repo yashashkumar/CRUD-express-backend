@@ -1,5 +1,5 @@
 // import express from "express";
-let express = require("express")
+let express = require("express");
 const app = express();
 const port = 2000;
 
@@ -13,8 +13,6 @@ import deleteById from "./routeImplementation/deleteRecordById";
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
-// const { addDataValidation } = require("./validation/data.validation");
-// let addDataValidation = require("./validation/data.validation");
 import addDataValidation from "./validation/data.validation";
 
 //HOME ROUTE
@@ -41,7 +39,9 @@ app.all("*", (req: any, res: any) => {
 });
 
 app.listen(port, () => {
-  console.log(`server running in port ${port}`);
+  console.log("changes are done!");
+  console.log(`server running in port ${port}!`);
 });
 
 // database1.connect();
+export default app;

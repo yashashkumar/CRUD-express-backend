@@ -12,8 +12,6 @@ var updateRecord_1 = require("./routeImplementation/updateRecord");
 var deleteRecordById_1 = require("./routeImplementation/deleteRecordById");
 var bodyParser = require("body-parser");
 app.use(bodyParser.json());
-// const { addDataValidation } = require("./validation/data.validation");
-// let addDataValidation = require("./validation/data.validation");
 var data_validation_1 = require("./validation/data.validation");
 //HOME ROUTE
 app.get("/", home_1["default"]);
@@ -32,6 +30,8 @@ app.all("*", function (req, res) {
     res.status(404).send("404! Page not found");
 });
 app.listen(port, function () {
-    console.log("server running in port ".concat(port));
+    console.log("changes are done!");
+    console.log("server running in port ".concat(port, "!"));
 });
 // database1.connect();
+exports["default"] = app;

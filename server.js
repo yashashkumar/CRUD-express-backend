@@ -16,13 +16,13 @@ var data_validation_1 = require("./validation/data.validation");
 //HOME ROUTE
 app.get("/", home_1["default"]);
 //GET ALL RECORDS - WORKING PROPERLY
-app.get("/get", getAllRecords_1["default"]);
+app.get("/getallrecords", getAllRecords_1["default"]);
 //GET RECORD BY ID - WORKING PROPERLY
-app.get("/get/id/:id", getRecordById_1["default"]);
+app.get("/getrecord/:id", getRecordById_1["default"]);
 //ADDING NEW RECORD - WORKING PROPERLY
 app.post("/datasets/create", data_validation_1["default"], addRecord_1["default"]);
 //UPDATING USER - WORKING PROPERLY
-app.put("/datasets/id/:id", data_validation_1["default"], updateRecord_1["default"]);
+app.put("/datasets/update/:id", data_validation_1["default"], updateRecord_1["default"]);
 //DELETING RECORD BY ID - WORKING PROPERLY
 app["delete"]("/datasets/delete/:id", deleteRecordById_1["default"]);
 //IF USER WILLINGLY CHANGES PATH

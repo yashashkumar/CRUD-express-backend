@@ -19,16 +19,16 @@ import addDataValidation from "./validation/data.validation";
 app.get("/", home);
 
 //GET ALL RECORDS - WORKING PROPERLY
-app.get("/get", getAllRecords);
+app.get("/getallrecords", getAllRecords);
 
 //GET RECORD BY ID - WORKING PROPERLY
-app.get("/get/id/:id", getRecordById);
+app.get("/getrecord/:id", getRecordById);
 
 //ADDING NEW RECORD - WORKING PROPERLY
 app.post("/datasets/create",addDataValidation, addRecord);
 
 //UPDATING USER - WORKING PROPERLY
-app.put("/datasets/id/:id",addDataValidation, updateRecord);
+app.put("/datasets/update/:id",addDataValidation, updateRecord);
 
 //DELETING RECORD BY ID - WORKING PROPERLY
 app.delete("/datasets/delete/:id", deleteById);

@@ -6,7 +6,7 @@ import dbErr from "./dbErrHelperObj";
 
 //WORKING
 let deleteById = (req: any, res: any) => {
-  let id: string = req.query.id;
+  let id: string = req.params['id'];
 
   let deleteMessage: object = {
     status: 200,

@@ -8,7 +8,7 @@ const newConnection_1 = __importDefault(require("./newConnection"));
 const query_1 = require("../helper/query");
 const dbErrHelperObj_1 = __importDefault(require("./dbErrHelperObj"));
 let getRecordById = (req, res) => {
-    let id = req.query.id;
+    let id = req.params['id'];
     // console.log(id);
     let resultMessage = {
         status: 400,

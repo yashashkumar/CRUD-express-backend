@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const newConnection_1 = __importDefault(require("./newConnection"));
 const query_1 = require("../helper/query");
 const query_2 = require("../helper/query");
+const dbErrHelperObj_1 = __importDefault(require("./dbErrHelperObj"));
 const cddate_1 = require("../helper/cddate");
 let addRecord = (req, res) => {
     let id = req.body.id;
@@ -29,7 +30,7 @@ let addRecord = (req, res) => {
         if (result.rowCount === 0) {
             newConnection_1.default.query(query_2.insertQuery +
                 `('${id}','${dataSchema}','${routerConfig}','${status}','${createdBy}','${updatedBy}','${cddate_1.createdDate}','${cddate_1.updatedDate}')`, (error, result) => {
-                error ? console.log(error) : res.send(result);
+                error ? res.send(dbErrHelperObj_1.default) : res.send(result);
             });
         }
         else {

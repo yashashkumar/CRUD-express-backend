@@ -4,7 +4,7 @@ import { getRecordByIdQuery } from "../helper/query";
 import dbErr from "./dbErrHelperObj";
 
 let getRecordById = (req: any, res: any) => {
-  let id: string = req.query.id;
+  let id: string = req.params['id'];
   // console.log(id);
 
   let resultMessage: object = {

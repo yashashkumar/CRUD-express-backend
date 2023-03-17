@@ -34,7 +34,7 @@ let addRecord = (req: any, res: any) => {
         insertQuery +
           `('${id}','${dataSchema}','${routerConfig}','${status}','${createdBy}','${updatedBy}','${createdDate}','${updatedDate}')`,
         (error: any, result: any) => {
-          error ? console.log(error) : res.send(result);
+          error ? res.send(dbErr): res.send(result);
         }
       );
     } else {

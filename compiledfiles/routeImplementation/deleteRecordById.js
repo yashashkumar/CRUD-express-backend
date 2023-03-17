@@ -9,7 +9,7 @@ const query_1 = require("../helper/query");
 const dbErrHelperObj_1 = __importDefault(require("./dbErrHelperObj"));
 //WORKING
 let deleteById = (req, res) => {
-    let id = req.query.id;
+    let id = req.params['id'];
     let deleteMessage = {
         status: 200,
         response: `the record with the id '${id}' deleted successfully`,

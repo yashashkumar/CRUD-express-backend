@@ -14,24 +14,21 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
 import addDataValidation from "./validation/data.validation";
+import updateByPatch from "./routeImplementation/updateUsingPatch";
 
-//HOME ROUTE
 app.get("/", home);
 
-//GET ALL RECORDS - WORKING PROPERLY
 app.get("/datasets/get", getAllRecords);
 
-//GET RECORD BY ID - WORKING PROPERLY
 app.get("/datasets/getrecord/:id", getRecordById);
 
-//ADDING NEW RECORD - WORKING PROPERLY
 app.post("/datasets/create",addDataValidation, addRecord);
 
-//UPDATING USER - WORKING PROPERLY
 app.put("/datasets/update/:id",addDataValidation, updateRecord);
 
-//DELETING RECORD BY ID - WORKING PROPERLY
 app.delete("/datasets/delete/:id", deleteById);
+
+app.patch("/updatebypatch/:id",addDataValidation,updateByPatch)
 
 //IF USER WILLINGLY CHANGES PATH
 app.all("*", (req: any, res: any) => {

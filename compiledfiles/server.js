@@ -16,18 +16,14 @@ const deleteRecordById_1 = __importDefault(require("./routeImplementation/delete
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 const data_validation_1 = __importDefault(require("./validation/data.validation"));
-//HOME ROUTE
+const updateUsingPatch_1 = __importDefault(require("./routeImplementation/updateUsingPatch"));
 app.get("/", home_1.default);
-//GET ALL RECORDS - WORKING PROPERLY
 app.get("/datasets/get", getAllRecords_1.default);
-//GET RECORD BY ID - WORKING PROPERLY
 app.get("/datasets/getrecord/:id", getRecordById_1.default);
-//ADDING NEW RECORD - WORKING PROPERLY
 app.post("/datasets/create", data_validation_1.default, addRecord_1.default);
-//UPDATING USER - WORKING PROPERLY
 app.put("/datasets/update/:id", data_validation_1.default, updateRecord_1.default);
-//DELETING RECORD BY ID - WORKING PROPERLY
 app.delete("/datasets/delete/:id", deleteRecordById_1.default);
+app.patch("/updatebypatch/:id", data_validation_1.default, updateUsingPatch_1.default);
 //IF USER WILLINGLY CHANGES PATH
 app.all("*", (req, res) => {
     res.status(404).send("404! Page not found");

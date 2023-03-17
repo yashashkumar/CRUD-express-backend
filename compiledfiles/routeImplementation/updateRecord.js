@@ -8,7 +8,7 @@ const newConnection_1 = __importDefault(require("./newConnection"));
 const dbErrHelperObj_1 = __importDefault(require("./dbErrHelperObj"));
 const cddate_1 = require("../helper/cddate");
 let updateRecord = (req, res) => {
-    let id = req.query.id;
+    let id = req.params['id'];
     let dataschema = req.body.dataschema;
     let routerconfig = req.body.routerconfig;
     //parsing the json values to string

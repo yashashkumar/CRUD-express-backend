@@ -4,7 +4,7 @@ import dbErr from "./dbErrHelperObj";
 import { updatedDate } from "../helper/cddate";
 
 let updateRecord = (req: any, res: any) => {
-  let id: string = req.query.id;
+  let id: string = req.params['id'];
   let dataschema: object = req.body.dataschema;
   let routerconfig: object = req.body.routerconfig;
   //parsing the json values to string

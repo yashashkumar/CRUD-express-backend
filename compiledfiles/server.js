@@ -19,9 +19,9 @@ const data_validation_1 = __importDefault(require("./validation/data.validation"
 //HOME ROUTE
 app.get("/", home_1.default);
 //GET ALL RECORDS - WORKING PROPERLY
-app.get("/getallrecords", getAllRecords_1.default);
+app.get("/datasets/get", getAllRecords_1.default);
 //GET RECORD BY ID - WORKING PROPERLY
-app.get("/getrecord/:id", getRecordById_1.default);
+app.get("/datasets/getrecord/:id", getRecordById_1.default);
 //ADDING NEW RECORD - WORKING PROPERLY
 app.post("/datasets/create", data_validation_1.default, addRecord_1.default);
 //UPDATING USER - WORKING PROPERLY

@@ -19,10 +19,10 @@ import addDataValidation from "./validation/data.validation";
 app.get("/", home);
 
 //GET ALL RECORDS - WORKING PROPERLY
-app.get("/getallrecords", getAllRecords);
+app.get("/datasets/get", getAllRecords);
 
 //GET RECORD BY ID - WORKING PROPERLY
-app.get("/getrecord/:id", getRecordById);
+app.get("/datasets/getrecord/:id", getRecordById);
 
 //ADDING NEW RECORD - WORKING PROPERLY
 app.post("/datasets/create",addDataValidation, addRecord);

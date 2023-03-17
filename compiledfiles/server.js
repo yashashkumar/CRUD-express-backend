@@ -23,7 +23,7 @@ app.get("/datasets/getrecord/:id", getRecordById_1.default);
 app.post("/datasets/create", data_validation_1.default, addRecord_1.default);
 app.put("/datasets/update/:id", data_validation_1.default, updateRecord_1.default);
 app.delete("/datasets/delete/:id", deleteRecordById_1.default);
-app.patch("/updatebypatch/:id", data_validation_1.default, updateUsingPatch_1.default);
+app.patch("/datasets/partialupdate/:id", data_validation_1.default, updateUsingPatch_1.default);
 //IF USER WILLINGLY CHANGES PATH
 app.all("*", (req, res) => {
     res.status(404).send("404! Page not found");

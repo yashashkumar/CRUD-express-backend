@@ -28,7 +28,7 @@ app.put("/datasets/update/:id",addDataValidation, updateRecord);
 
 app.delete("/datasets/delete/:id", deleteById);
 
-app.patch("/updatebypatch/:id",addDataValidation,updateByPatch)
+app.patch("/datasets/partialupdate/:id",addDataValidation,updateByPatch)
 
 //IF USER WILLINGLY CHANGES PATH
 app.all("*", (req: any, res: any) => {

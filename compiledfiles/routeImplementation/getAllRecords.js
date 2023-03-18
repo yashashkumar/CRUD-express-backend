@@ -9,7 +9,11 @@ const query_1 = require("../helper/query");
 const getAllRecords = (req, res) => {
     //WORKING
     newConnection_1.default.query(query_1.selectAllQuery, (err, result) => {
-        err ? res.status(500).send({ error: "database error", status: 500 }) : res.send(result.rows);
+        err
+            ? res.status(500).send({ error: "database error", status: 500 })
+            : result.rowCount === 0
+                ? res.status(204).send()
+                : res.send(result.rows);
     });
     newConnection_1.default.end;
 };

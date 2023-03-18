@@ -1,16 +1,11 @@
-// let database1 = require("./newConnection");
 import datasetsDB from "./newConnection";
 import { getRecordByIdQuery } from "../helper/query";
-import dbErr from "./dbErrHelperObj";
+import { dbErr, idNotFound } from "../helper/responses";
 
 let getRecordById = (req: any, res: any) => {
   let id: string = req.params['id'];
-  // console.log(id);
 
-  let resultMessage: object = {
-    status: 400,
-    result: `the record with the id '${id}' is not present`,
-  };
+  
 
   datasetsDB.query(getRecordByIdQuery + `'${id}'`, (err: any, result: any) => {
     if (err) {
@@ -22,7 +17,7 @@ let getRecordById = (req: any, res: any) => {
       };
       res.send(resultObjByID);
     } else {
-      res.status(400).send(resultMessage);
+      res.status(400).send(idNotFound);
     }
   });
   datasetsDB.end;

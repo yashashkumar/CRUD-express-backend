@@ -3,20 +3,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// let database1 = require("./newConnection");
 const newConnection_1 = __importDefault(require("./newConnection"));
 const query_1 = require("../helper/query");
-const dbErrHelperObj_1 = __importDefault(require("./dbErrHelperObj"));
+const responses_1 = require("../helper/responses");
 let getRecordById = (req, res) => {
     let id = req.params['id'];
-    // console.log(id);
-    let resultMessage = {
-        status: 400,
-        result: `the record with the id '${id}' is not present`,
-    };
     newConnection_1.default.query(query_1.getRecordByIdQuery + `'${id}'`, (err, result) => {
         if (err) {
-            res.status(500).send(dbErrHelperObj_1.default);
+            res.status(500).send(responses_1.dbErr);
         }
         else if (result.rowCount != 0) {
             let resultObjByID = {
@@ -26,7 +20,7 @@ let getRecordById = (req, res) => {
             res.send(resultObjByID);
         }
         else {
-            res.status(400).send(resultMessage);
+            res.status(400).send(responses_1.idNotFound);
         }
     });
     newConnection_1.default.end;

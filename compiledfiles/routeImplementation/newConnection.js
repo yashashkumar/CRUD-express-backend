@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const { Client } = require("pg");
 const datasetsDB = new Client({
     host: "localhost",
+    //host.docker.internal
     user: "postgres",
     port: 5432,
     password: "Yashas@200116",

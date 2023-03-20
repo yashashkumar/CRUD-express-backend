@@ -1,14 +1,10 @@
 import { updatedDate } from "../helper/cddate";
 import { getRecordByIdQuery } from "../helper/query";
-import dbErr from "./dbErrHelperObj";
+import { dbErr, unsuccessfulUpdate, updatedMessage } from "../helper/responses";
 import datasetsDB from "./newConnection";
 
 let updateByPatch = (req: any, res: any) => {
   let id: string = req.params["id"];
-  let unsuccessfulUpdate = {
-    status: 400,
-    message: `data with specified id '${id}' is not present`,
-  };
   datasetsDB.query(getRecordByIdQuery + `'${id}'`, (err: any, result: any) => {
     if (err) {
       console.log(err);
@@ -16,21 +12,14 @@ let updateByPatch = (req: any, res: any) => {
       res.status(400).send(unsuccessfulUpdate);
     } else {
       // console.log(result.rows[0]);
-      let dataschema: object =
-        req.body.dataschema || result.rows[0].data_schema;
-      let routerconfig: object =
-        req.body.routerconfig || result.rows[0].router_config;
-      //parsing the json values to string
-      let dataSchema = JSON.stringify(dataschema);
-      let routerConfig = JSON.stringify(routerconfig);
-
+      let dataschema: object = req.body.dataschema || result.rows[0].data_schema;
+      let routerconfig: object = req.body.routerconfig || result.rows[0].router_config;
       let status: string = req.body.status || result.rows[0].status;
       let updatedBy: string = req.body.updatedBy || result.rows[0].updated_by;
 
-      let updatedMessage = {
-        status: "updated",
-        message: `id with '${id}' updated successfully`,
-      };
+      //parsing the json values to string
+      let dataSchema = JSON.stringify(dataschema);
+      let routerConfig = JSON.stringify(routerconfig);
 
       datasetsDB.query(
         `UPDATE datasets 

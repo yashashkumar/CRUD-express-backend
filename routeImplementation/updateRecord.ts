@@ -1,10 +1,10 @@
 // let database1 = require("./newConnection");
 import datasetsDB from "./newConnection";
-import dbErr from "./dbErrHelperObj";
+import { dbErr, unsuccessfulUpdate, updatedMessage } from "../helper/responses";
 import { updatedDate } from "../helper/cddate";
 
 let updateRecord = (req: any, res: any) => {
-  let id: string = req.params['id'];
+  let id: string = req.params["id"];
   let dataschema: object = req.body.dataschema;
   let routerconfig: object = req.body.routerconfig;
   //parsing the json values to string
@@ -13,16 +13,6 @@ let updateRecord = (req: any, res: any) => {
 
   let status: string = req.body.status;
   let updatedBy: string = req.body.updatedBy;
-
-  let updatedMessage = {
-    status: "updated",
-    message: `id with '${id}' updated successfully`,
-  };
-
-  let unsuccessfulUpdate = {
-    status: 400,
-    message: `data with specified id '${id}' is not present`,
-  };
 
   datasetsDB.query(
     `UPDATE datasets 

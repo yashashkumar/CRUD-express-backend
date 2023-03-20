@@ -5,10 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 // let database1 = require("./newConnection");
 const newConnection_1 = __importDefault(require("./newConnection"));
-const dbErrHelperObj_1 = __importDefault(require("./dbErrHelperObj"));
+const responses_1 = require("../helper/responses");
 const cddate_1 = require("../helper/cddate");
 let updateRecord = (req, res) => {
-    let id = req.params['id'];
+    let id = req.params["id"];
     let dataschema = req.body.dataschema;
     let routerconfig = req.body.routerconfig;
     //parsing the json values to string
@@ -16,10 +16,6 @@ let updateRecord = (req, res) => {
     let routerConfig = JSON.stringify(routerconfig);
     let status = req.body.status;
     let updatedBy = req.body.updatedBy;
-    let updatedMessage = {
-        status: "updated",
-        message: `id with '${id}' updated successfully`,
-    };
     let unsuccessfulUpdate = {
         status: 400,
         message: `data with specified id '${id}' is not present`,
@@ -28,9 +24,9 @@ let updateRecord = (req, res) => {
        SET data_schema = '${dataSchema}' ,router_config = '${routerConfig}',status = '${status}' ,updated_by = '${updatedBy}',updated_date = '${cddate_1.updatedDate}' 
        WHERE id = '${id}'`, (err, result) => {
         err
-            ? res.status(500).send(dbErrHelperObj_1.default)
+            ? res.status(500).send(responses_1.dbErr)
             : result.rowCount != 0
-                ? res.send(updatedMessage)
+                ? res.send(responses_1.updatedMessage)
                 : res.status(400).send(unsuccessfulUpdate);
     });
     newConnection_1.default.end;

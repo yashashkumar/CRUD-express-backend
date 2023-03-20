@@ -16,7 +16,7 @@
   "version": "1.0.0",
   "main": "serverCalci.ts",
   "scripts": {
-    "test": "mocha */test.spec.js",
+    "test": "mocha compiledfiles/unittest/test.spec.js",
     "start": "nodemon server.ts"
   },
   "author": "",

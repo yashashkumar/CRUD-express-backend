@@ -1,12 +1,12 @@
+require("dotenv").config();
 const { Client } = require("pg");
 
 const datasetsDB = new Client({
-  host: "localhost",
-  //host.docker.internal
-  user: "postgres",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
   port:5432,
-  password: "Yashas@200116",
-  database: "dataset",
+  password: process.env.DB_PASS,
+  database: process.env.DB_DATABASE,
 });
 
 datasetsDB.connect((err : any , res:any)=>{

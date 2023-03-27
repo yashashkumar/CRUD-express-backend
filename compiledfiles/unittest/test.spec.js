@@ -6,43 +6,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //Require the dev-dependencies
 let chai1 = require('chai');
 let chaiHttp = require('chai-http');
-const server_1 = __importDefault(require("../server"));
-let should = chai1.should();
+const deleteRecordByIdTest_1 = __importDefault(require("./testimpl/deleteRecordByIdTest"));
+const getrecordbyidtest_1 = __importDefault(require("./testimpl/getrecordbyidtest"));
+const getrecordstest_1 = __importDefault(require("./testimpl/getrecordstest"));
+const postexistingrecord_1 = __importDefault(require("./testimpl/postexistingrecord"));
+const postnewrecord_1 = __importDefault(require("./testimpl/postnewrecord"));
 chai1.use(chaiHttp);
-describe('get records', () => {
-    it('it should GET all the records', (done) => {
-        chai1.request(server_1.default)
-            .get('/get')
-            .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.a('array');
-            res.body.length.should.not.be.eql(0);
-            done();
-        });
-    });
-});
-describe('/POST record', () => {
-    it('it should not POST a record', (done) => {
-        let record = {
-            "id": "db100",
-            "dataschema": {
-                "name": "himagirish",
-                "lname": "nd"
-            },
-            "routerconfig": {
-                "method": "post"
-            },
-            "status": "active",
-            "createdBy": "himagirish",
-            "updatedBy": "himagirish"
-        };
-        chai1.request(server_1.default)
-            .post('/datasets/create')
-            .send(record)
-            .end((err, res) => {
-            res.should.have.status(200);
-            // res.body.should.be.a('object');
-            done();
-        });
-    });
-});
+describe('/GET records', getrecordstest_1.default);
+describe('/POST record', postexistingrecord_1.default);
+describe('/POST new record', postnewrecord_1.default);
+describe('/GET records by id', getrecordbyidtest_1.default);
+describe('/DELETE record by id', deleteRecordByIdTest_1.default);

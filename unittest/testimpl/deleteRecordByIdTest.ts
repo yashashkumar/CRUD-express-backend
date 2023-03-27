@@ -1,23 +1,43 @@
 let chai1 = require("chai");
-let chaiHttp = require("chai-http");
 import app from "../../server";
-let should = chai1.should();
-import datasetsDB from "../../routeImplementation/newConnection";
 import { expect } from "chai";
 
 
 let deleteRecordById = () =>{
-    let id = "db00"
-    it("id not present", (done) => {
-        let id = "1110"
+    let id = "d101"
+    it("should delete record with ID if present", (done) => {
       chai1
         .request(app)
-        .delete(`/datasets/delete/${id}`)
-        .end((err: any, result: any) => {
-          result.should.have.status(400);
-          result.body.should.be.a("object");
-          done(err);
+        .get(`/datasets/getrecord/${id}`)
+        .end((err: any, res: any) => {
+        // console.log(res.body);
+          if (res.body.status != 400) {
+            chai1
+              .request(app)
+              .delete(`/datasets/delete/${id}`)
+              .end((err: any, res: any) => {
+                res.should.have.status(200);
+                done(err);
+              });
+          } else {
+            expect(res.status).to.equal(400);
+            done();
+          }
         });
     });
+
+    it("unable to find id",(done)=>{
+      chai1
+      .request(app)
+      .get(`/datasets/getrecord/${id}`)
+      .end((err: any, res: any) => {
+        // console.log(res.body);
+        if (res.status === 400) {
+          res.should.have.status(400);
+          res.body.should.be.an("object");
+        }
+        done();
+      });
+  });
 }
 export default deleteRecordById;

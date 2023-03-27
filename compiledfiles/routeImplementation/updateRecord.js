@@ -16,10 +16,6 @@ let updateRecord = (req, res) => {
     let routerConfig = JSON.stringify(routerconfig);
     let status = req.body.status;
     let updatedBy = req.body.updatedBy;
-    let unsuccessfulUpdate = {
-        status: 400,
-        message: `data with specified id '${id}' is not present`,
-    };
     newConnection_1.default.query(`UPDATE datasets 
        SET data_schema = '${dataSchema}' ,router_config = '${routerConfig}',status = '${status}' ,updated_by = '${updatedBy}',updated_date = '${cddate_1.updatedDate}' 
        WHERE id = '${id}'`, (err, result) => {
@@ -27,7 +23,7 @@ let updateRecord = (req, res) => {
             ? res.status(500).send(responses_1.dbErr)
             : result.rowCount != 0
                 ? res.send(responses_1.updatedMessage)
-                : res.status(400).send(unsuccessfulUpdate);
+                : res.status(400).send(responses_1.unsuccessfulUpdate);
     });
     newConnection_1.default.end;
 };

@@ -22,26 +22,26 @@ let postnewrecord = () => {
         createdBy: "himagirish",
         updatedBy: "himagirish",
     };
-    describe('POST ', () => {
-        it('should post data with ID if not present in database', (done) => {
-            chai1.request(server_1.default)
-                .get(`/datasets/getrecord/${record.id}`)
-                .end((err, res) => {
-                console.log(res.body);
-                if (res.body.status === 400) {
-                    chai1.request(server_1.default)
-                        .post('/datasets/create')
-                        .send(record)
-                        .end((err, res) => {
-                        res.should.have.status(400);
-                        done();
-                    });
-                }
-                else {
-                    (0, chai_1.expect)(res.status).to.equal(200);
+    it("should post data with ID if not present in database", (done) => {
+        chai1
+            .request(server_1.default)
+            .get(`/datasets/getrecord/${record.id}`)
+            .end((err, res) => {
+            //   console.log(res.body);
+            if (res.body.status === 400) {
+                chai1
+                    .request(server_1.default)
+                    .post("/datasets/create")
+                    .send(record)
+                    .end((err, res) => {
+                    res.should.have.status(201);
                     done();
-                }
-            });
+                });
+            }
+            else {
+                (0, chai_1.expect)(res.status).to.equal(200);
+                done();
+            }
         });
     });
 };
